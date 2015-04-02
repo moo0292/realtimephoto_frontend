@@ -56,7 +56,30 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
-
+    .state('app.home', {
+      url: "/home",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/home.html'
+        }
+      }
+    })
+    .state('app.setting', {
+      url: "/setting",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/setting.html'
+        }
+      }
+    })
+    .state('app.photo_edit_main', {
+      url: "/edit_main",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/photo_edit_main.html'
+        }
+      }
+    })
   .state('app.single', {
     url: "/playlists/:playlistId",
     views: {
@@ -67,5 +90,5 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/app/playlists');
+  $urlRouterProvider.otherwise('/app/home');
 });
