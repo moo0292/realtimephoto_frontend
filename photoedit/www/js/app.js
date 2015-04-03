@@ -80,6 +80,30 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.photo_edit_select', {
+      url: "/edit_select",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/photo_edit_select.html'
+        }
+      }
+    })
+    .state('app.photo_edit_take', {
+      url: "/edit_take",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/photo_edit_take.html'
+        }
+      }
+    })
+    .state('app.edit_photo', {
+      url: "/edit_photo",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/edit_photo.html'
+        }
+      }
+    })
   .state('app.single', {
     url: "/playlists/:playlistId",
     views: {

@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -31,6 +31,19 @@ angular.module('starter.controllers', [])
       $scope.closeLogin();
     }, 1000);
   };
+
+  $scope.goToTakePhoto = function() {
+    $location.path('/app/edit_take');
+
+  }
+
+  $scope.goSelectPhoto = function() {
+    $location.path('/app/edit_select');
+  }
+
+  $scope.goEditPhoto = function() {
+    $location.path('/app/edit_photo');
+  }
 })
 
 .controller('PlaylistsCtrl', function($scope) {
