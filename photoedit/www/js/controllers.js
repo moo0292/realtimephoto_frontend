@@ -44,6 +44,8 @@ angular.module('starter.controllers', [])
   $scope.goEditPhoto = function() {
     $location.path('/app/edit_photo');
   }
+
+  $scope.test = "this is a test"
 })
 
 .controller('PlaylistsCtrl', function($scope) {
