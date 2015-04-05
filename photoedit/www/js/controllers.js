@@ -1,4 +1,4 @@
-angular.module('starter.controllers', [])
+angular.module('starter.controllers', ['ionic'])
 
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
   // Form data for the login modal
@@ -44,6 +44,10 @@ angular.module('starter.controllers', [])
   $scope.goEditPhoto = function() {
     $location.path('/app/edit_photo');
   }
+
+  $scope.settings = {
+    enableFriends: true
+  };
 })
 
 .controller('PlaylistsCtrl', function($scope) {
