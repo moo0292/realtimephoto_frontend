@@ -1,0 +1,21 @@
+
+.titleFont{/*font of title*/
+	font-size:40px;
+	color:black;
+}
+
+#avtC{ /*avatar color*/
+	background:#CCFFFF;
+
+}
+
+#backgroundC{ /*background color*/
+	background:black;
+}
+
+#rowSpaceing{
+
+	margin-top: 60px;
+	
+
+}
