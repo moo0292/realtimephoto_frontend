@@ -14,8 +14,9 @@
 }
 
 #rowSpaceing{
-
 	margin-top: 60px;
-	
+}
 
+#center-text {
+	text-align: center;
 }
