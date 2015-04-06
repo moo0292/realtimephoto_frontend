@@ -1,10 +1,5 @@
 describe('Controllers', function(){
     var scope;
-
-
-    beforeEach(function() {
-        browser().navigateTo('/');
-    });
     
     // load the controller's module
     beforeEach(module('starter.controllers'));
