@@ -24,3 +24,20 @@
 .menu-margin-right {
 	margin-right: 1em;
 }
+
+.center-text {
+	text-align: center;
+}
+
+.center-vertical {
+	display: table-cell;
+	vertical-align: middle;
+	margin-left: 50%;
+	margin-right: 50%;
+
+}
+
+#brightness-text {
+	margin-top: 10px;
+	color: #59ABE3;
+}

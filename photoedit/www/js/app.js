@@ -104,6 +104,15 @@ angular.module('starter', ['ionic', 'starter.controllers'])
         }
       }
     })
+    .state('app.meesh_photo_edit', {
+      url: "/meesh_photo_edit",
+      views: {
+        'menuContent': {
+          templateUrl: 'templates/meesh_photo_edit.html',
+          controller: 'PhotoEditCtrl'
+        }
+      }
+    })
   .state('app.single', {
     url: "/playlists/:playlistId",
     views: {
