@@ -3,12 +3,19 @@ angular.module('starter.controllers', ['ionic'])
 .controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
     // Form data for the login modal
     $scope.loginData = {};
+    $scope.signupData = {};
 
     // Create the login modal that we will use later
     $ionicModal.fromTemplateUrl('templates/login.html', {
         scope: $scope
     }).then(function(modal) {
         $scope.modal = modal;
+    });
+
+    $ionicModal.fromTemplateUrl('templates/signup.html', {
+        scope: $scope
+    }).then(function(modal) {
+        $scope.modalSignup = modal;
     });
 
     // Triggered in the login modal to close it
@@ -31,6 +38,25 @@ angular.module('starter.controllers', ['ionic'])
             $scope.closeLogin();
         }, 1000);
     };
+
+    $scope.openSignup = function() {
+    	$scope.modal.hide();
+    	$scope.modalSignup.show();
+    }
+
+    $scope.closeSignup = function() {
+    	$scope.modalSignup.hide();
+    }
+
+    $scope.doSignup = function() {
+    	console.log('Doing Signup', $scope.signupData);
+
+        // Simulate a login delay. Remove this and replace with your login
+        // code if using a login system
+        $timeout(function() {
+            $scope.closeSignup();
+        }, 1000);
+    }
 
     $scope.goToTakePhoto = function() {
         $location.path('/app/edit_take');
