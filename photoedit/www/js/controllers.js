@@ -48,6 +48,26 @@ angular.module('starter.controllers', ['ionic'])
   $scope.settings = {
     enableFriends: true
   };
+  
+  $scope.counter = 30;
+    $scope.onTimeout = function(){
+        $scope.counter--;
+         if ($scope.counter > 0) {
+            mytimeout = $timeout($scope.onTimeout,1000);
+        }
+        else {
+            alert("Invite has expired");
+        }
+    }
+    var mytimeout = $timeout($scope.onTimeout,1000);
+	
+	$scope.start= function(){
+        $scope.counter = 30;
+        mytimeout = $timeout($scope.onTimeout,1000);
+    }
+
+    
+  
 })
 
 .controller('PlaylistsCtrl', function($scope) {
