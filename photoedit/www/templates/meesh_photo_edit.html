@@ -1,53 +1,33 @@
 <ion-view view-title="photo edit">
-    <ion-content>
-        <canvas id="c" style="border:1px solid black;" width="400" height="300"></canvas>
+    <ion-content scroll="false">
+        <canvas id="canv" style="border:1px solid black;" width="400" height="300"></canvas>
         <div class="edit-photo-margin-top row">
-        	<div class="col col-25 center-text"><a class="button button-clear button-positive button-icon icon ion-minus-round"></a></div>
-        	<div class="col col-50 center-text"> 
-        		<h3 id="brightness-text">Brightness</h3>
-        	</div>
-        	<div class="col col-25 center-text"><a class="button button-clear button-positive button-icon icon ion-plus-round"></a></div>
+            <div class="col col-25 center-text">
+                <a class="button button-clear button-positive button-icon icon ion-minus-round" ng-click="decreaseBrightness()"></a>
+            </div>
+            <div class="col col-50 center-text">
+                <h3 id="brightness-text">Brightness</h3>
+            </div>
+            <div class="col col-25 center-text">
+                <a class="button button-clear button-positive button-icon icon ion-plus-round" ng-click="increaseBrightness()"></a>
+            </div>
         </div>
-
         <div class="row">
-        	<div class="col col-20"><button class="button button-outline button-dark" ng-click="changeBW()" ng-class="{activated: isBlackAndWhite}">B/W</button></div>
-
-        	<div class="col col-20"><button class="button button-outline button-stable" ng-click="changeINV()" ng-class="{activated: isInvert}">INV</button></div>
-
-        	<div class="col col-20"><button class="button button-outline button-positive" ng-click="changeSEP()" ng-class="{activated: isSepia}">SEP</button></div>
-
-        	<div class="col col-20"><button class="button button-outline button-balanced" ng-click="changeNOI()" ng-class="{activated: isNoise}">NOI</button></div>
-
-        	<div class="col col-20"><button class="button button-outline button-royal" ng-click="changePXL()" ng-class="{activated: isPixelate}">PXL</button></div>
-        </div>
-        <div class="button-bar">
-            <a class="button button-dark" ng-click="isGray()">Enable Grayscale</a>
-            <a class="button button-dark" ng-click="notGray()">Disable Grayscale</a>
-        </div>
-        <p></p>
-        <div class="button-bar">
-            <a class="button button-stable" ng-click="isInvert()">Enable Invert</a>
-            <a class="button button-stable" ng-click="notInvert()">Disable Invert</a>
-        </div>
-        <p></p>
-        <div class="button-bar">
-            <a class="button button-positive" ng-click="isSepia()">Enable Sepia</a>
-            <a class="button button-positive" ng-click="notSepia()">Disable Sepia</a>
-        </div>
-        <p></p>
-        <div class="button-bar">
-            <a class="button button-calm" ng-click="isBright()">Enable Brightness</a>
-            <a class="button button-calm" ng-click="notBright()">Disable Brightness</a>
-        </div>
-        <p></p>
-        <div class="button-bar">
-            <a class="button button-balanced" ng-click="isNoise()">Enable Noise</a>
-            <a class="button button-balanced" ng-click="notNoise()">Disable Noise</a>
-        </div>
-        <p></p>
-        <div class="button-bar">
-            <a class="button button-royal" ng-click="isPixelate()">Enable Pixelate</a>
-            <a class="button button-royal" ng-click="notPixelate()">Disable Pixelate</a>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-dark" ng-click="changeBW()" id="bwId">B/W</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-stable" ng-click="changeINV()" id="invId">INV</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-positive" ng-click="changeSEP()" id="sepId">SEP</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-balanced" ng-click="changeNOI()" id="noiId">NOI</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-royal" ng-click="changePXL()" id="pxlId">PXL</button>
+            </div>
         </div>
         <div class="button-bar">
             <a class="button button-assertive" ng-click="disableAll()">Disable All</a>
