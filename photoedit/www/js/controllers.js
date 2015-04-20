@@ -1,6 +1,6 @@
-angular.module('starter.controllers', ['ionic'])
+angular.module('starter.controllers', ['ionic','ngCordova'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $cordovaCamera) {
   // Form data for the login modal
   $scope.loginData = {};
 
@@ -11,7 +11,60 @@ angular.module('starter.controllers', ['ionic'])
     $scope.modal = modal;
   });
 
+
+  $scope.takePicture = function(){
+      var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.CAMERA,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) { 
+      var image = document.getElementById('myImage');
+      image.src = "data:image/jpeg;base64," + imageData;
+      console.log("working");
+    })
+      
+    }, function(err) {
+      // error
+    };
+
+    $scope.getAlbumPic = function(){
+      var options = {
+      quality: 50,
+      destinationType: Camera.DestinationType.DATA_URL,
+      sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+      allowEdit: true,
+      encodingType: Camera.EncodingType.JPEG,
+      targetWidth: 100,
+      targetHeight: 100,
+      popoverOptions: CameraPopoverOptions,
+      saveToPhotoAlbum: false
+    };
+
+    $cordovaCamera.getPicture(options).then(function(imageData) { 
+      var image = document.getElementById('myImage');
+      image.src = "data:image/jpeg;base64," + imageData;
+      console.log("working");
+    })
+      
+    }, function(err) {
+      // error
+    };
+  
+
+
+  
+
   // Triggered in the login modal to close it
+
+
   $scope.closeLogin = function() {
     $scope.modal.hide();
   };
