@@ -31,12 +31,19 @@ angular.module('starter.controllers', ['ionic'])
     // Perform the login action when the user submits the login form
     $scope.doLogin = function() {
         console.log('Doing login', $scope.loginData);
-
-        // Simulate a login delay. Remove this and replace with your login
-        // code if using a login system
-        $timeout(function() {
-            $scope.closeLogin();
-        }, 1000);
+		var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
+        console.log('Attempting login', $scope.loginData);
+ 
+		ref.authWithPassword({
+		  email    : $scope.loginData.username,
+		  password : $scope.loginData.password
+		}, function(error, authData) {
+		  if (error) {
+			console.log("Login Failed!", error);
+		  } else {
+			console.log("Authenticated successfully with payload:", authData);
+		  }
+		});
     };
 
     $scope.openSignup = function() {
@@ -50,12 +57,17 @@ angular.module('starter.controllers', ['ionic'])
 
     $scope.doSignup = function() {
     	console.log('Doing Signup', $scope.signupData);
-
-        // Simulate a login delay. Remove this and replace with your login
-        // code if using a login system
-        $timeout(function() {
-            $scope.closeSignup();
-        }, 1000);
+		var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
+		ref.createUser({
+		  email    :  $scope.signupData.username,
+		  password :  $scope.signupData.password
+		}, function(error, userData) {
+		  if (error) {
+			console.log("Error creating user:", error);
+		  } else {
+			console.log("Successfully created user account with uid:", userData.uid);
+		  }
+		});
     }
 
     $scope.goToTakePhoto = function() {
