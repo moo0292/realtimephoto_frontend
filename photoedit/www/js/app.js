@@ -4,7 +4,7 @@
 // 'starter' is the name of this angular module example (also set in a <body> attribute in index.html)
 // the 2nd parameter is an array of 'requires'
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers'])
+angular.module('starter', ['ionic', 'starter.controllers','ngCordova'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -19,6 +19,35 @@ angular.module('starter', ['ionic', 'starter.controllers'])
     }
   });
 })
+/*
+.factory('Camera', ['$q', '$base64',
+    function($q, $base64) {
+
+        return {
+            getPicture: function(options) {
+                var q = $q.defer();
+
+                navigator.camera.getPicture(function(result) {
+                    // Do any magic you need
+                    q.resolve(result);
+                }, function(err) {
+                    q.reject(err);
+                }, {
+                    quality: 80,
+                    targetWidth: 320,
+                    targetHeight: 320,
+                    saveToPhotoAlbum: false,
+                    destinationType: Camera.DestinationType.FILE_URI,
+                    encodingType: Camera.EncodingType.JPEG,
+                    sourceType: Camera.PictureSourceType.CAMERA
+                });
+
+                return q.promise;
+            }
+        }
+    }
+])*/
+
 
 .config(function($stateProvider, $urlRouterProvider) {
   $stateProvider

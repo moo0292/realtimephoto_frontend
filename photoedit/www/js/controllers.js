@@ -1,6 +1,6 @@
-angular.module('starter.controllers', ['ionic'])
+angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.signupData = {};
@@ -137,6 +137,54 @@ angular.module('starter.controllers', ['ionic'])
             confirmPopup.close(); //close the popup after 3 seconds for some reason
         }, 10000);
     };
+
+    $scope.takePicture = function() {
+            var options = {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.CAMERA,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+                console.log("working");
+            })
+
+        },
+        function(err) {
+            // error
+        };
+
+    $scope.getAlbumPic = function() {
+            var options = {
+                quality: 50,
+                destinationType: Camera.DestinationType.DATA_URL,
+                sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
+                allowEdit: true,
+                encodingType: Camera.EncodingType.JPEG,
+                targetWidth: 100,
+                targetHeight: 100,
+                popoverOptions: CameraPopoverOptions,
+                saveToPhotoAlbum: false
+            };
+
+            $cordovaCamera.getPicture(options).then(function(imageData) {
+                var image = document.getElementById('myImage');
+                image.src = "data:image/jpeg;base64," + imageData;
+                console.log("working");
+            })
+
+        },
+        function(err) {
+            // error
+        };
 })
 
 .controller('PhotoEditCtrl', function($scope, $ionicSideMenuDelegate) {

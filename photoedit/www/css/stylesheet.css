@@ -4,11 +4,14 @@
     font-size: 40px;
     color: black;
 }
-
 #avtC {
     /*avatar color*/
     
     background: #CCFFFF;
+}
+.titleFont{/*font of title*/
+	font-size:29px;
+	color:black;
 }
 
 #backgroundC {
@@ -21,12 +24,38 @@
     margin-top: 60px;
 }
 
+
 #center-text {
     text-align: center;
 }
 
 .menu-margin-right {
     margin-right: 1em;
+}
+
+#backgroundC{ /*background color for home*/
+	background:#000000;
+}
+
+#backgroundMenu{ /*background of the menu*/
+	background:#ACC4C8;
+}
+
+
+.menuButton{
+	background:#C2D8DC;
+	color:#115377;
+}
+
+
+#menuLink a { background:#C2D8DC;}
+#menuLink a { color:#115377;}
+#menuLink a:active {background:white;}
+
+
+
+#rowSpaceing{
+	margin-top: 60px;
 }
 
 .center-text {
