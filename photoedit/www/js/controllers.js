@@ -1,6 +1,6 @@
 angular.module('starter.controllers', ['ionic'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.signupData = {};
@@ -31,43 +31,73 @@ angular.module('starter.controllers', ['ionic'])
     // Perform the login action when the user submits the login form
     $scope.doLogin = function() {
         console.log('Doing login', $scope.loginData);
-		var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
+        var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
         console.log('Attempting login', $scope.loginData);
- 
-		ref.authWithPassword({
-		  email    : $scope.loginData.username,
-		  password : $scope.loginData.password
-		}, function(error, authData) {
-		  if (error) {
-			console.log("Login Failed!", error);
-		  } else {
-			console.log("Authenticated successfully with payload:", authData);
-		  }
-		});
+
+        ref.authWithPassword({
+            email: $scope.loginData.username,
+            password: $scope.loginData.password
+        }, function(error, authData) {
+            if (error) {
+                console.log("Login Failed!", error);
+
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Login fail!',
+                    template: error
+                });
+                alertPopup.then(function(res) {
+
+                });
+
+            } else {
+                console.log("Authenticated successfully with payload:", authData.password.email);
+
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Login successful!',
+                    template: 'Welcome ' + authData.password.email
+                });
+                alertPopup.then(function(res) {
+                    $scope.modal.hide();
+                });
+
+            }
+        });
     };
 
     $scope.openSignup = function() {
-    	$scope.modal.hide();
-    	$scope.modalSignup.show();
+        $scope.modal.hide();
+        $scope.modalSignup.show();
     }
 
     $scope.closeSignup = function() {
-    	$scope.modalSignup.hide();
+        $scope.modalSignup.hide();
     }
 
     $scope.doSignup = function() {
-    	console.log('Doing Signup', $scope.signupData);
-		var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
-		ref.createUser({
-		  email    :  $scope.signupData.username,
-		  password :  $scope.signupData.password
-		}, function(error, userData) {
-		  if (error) {
-			console.log("Error creating user:", error);
-		  } else {
-			console.log("Successfully created user account with uid:", userData.uid);
-		  }
-		});
+        console.log('Doing Signup', $scope.signupData);
+        var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
+        ref.createUser({
+            email: $scope.signupData.username,
+            password: $scope.signupData.password
+        }, function(error, userData) {
+            if (error) {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Signup fail!',
+                    template: error
+                });
+                alertPopup.then(function(res) {
+
+                });
+            } else {
+                var alertPopup = $ionicPopup.alert({
+                    title: 'Signup success!'
+                });
+                alertPopup.then(function(res) {
+                    $scope.modalSignup.hide()
+                });
+
+            }
+        });
     }
 
     $scope.goToTakePhoto = function() {
@@ -85,6 +115,27 @@ angular.module('starter.controllers', ['ionic'])
 
     $scope.settings = {
         enableFriends: true
+    };
+
+    $scope.showConfirm = function() {
+        $scope.counter = {
+            count: 30
+        }
+
+        var confirmPopup = $ionicPopup.confirm({
+            title: 'A user ' + ' Kittitat Rodchaidee ' + ' want to edit photo with you',
+            template: 'Click accept to edit photo with your friend. You have ten seconds to decide.'
+        });
+        confirmPopup.then(function(res) {
+            if (res) {
+                console.log('You are sure');
+            } else {
+                console.log('You are not sure');
+            }
+        });
+        $timeout(function() {
+            confirmPopup.close(); //close the popup after 3 seconds for some reason
+        }, 10000);
     };
 })
 
@@ -105,7 +156,7 @@ angular.module('starter.controllers', ['ionic'])
 
     angular.element(document).ready(function() {
 
-    	$ionicSideMenuDelegate.canDragContent(false);
+        $ionicSideMenuDelegate.canDragContent(false);
 
         var canvas = new fabric.Canvas('canv');
         var f = fabric.Image.filters;
@@ -293,15 +344,15 @@ angular.module('starter.controllers', ['ionic'])
         };
 
         $scope.increaseBrightness = function() {
-        	var obj = canvas.getActiveObject();
-			obj.filters.push(brightFilter);
-			obj.applyFilters(canvas.renderAll.bind(canvas));
+            var obj = canvas.getActiveObject();
+            obj.filters.push(brightFilter);
+            obj.applyFilters(canvas.renderAll.bind(canvas));
         };
 
         $scope.decreaseBrightness = function() {
-        	var obj = canvas.getActiveObject();
-			obj.filters.push(decreaseBrightFilter);
-			obj.applyFilters(canvas.renderAll.bind(canvas));
+            var obj = canvas.getActiveObject();
+            obj.filters.push(decreaseBrightFilter);
+            obj.applyFilters(canvas.renderAll.bind(canvas));
         }
 
     })
