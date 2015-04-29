@@ -1,7 +1,9 @@
-angular.module('starter.controllers', ['ionic', 'ngCordova'])
+angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray) {
     // Form data for the login modal
+
+    $ionicSideMenuDelegate.canDragContent(true);
     $scope.loginData = {};
     $scope.signupData = {};
 
@@ -139,6 +141,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     };
 
     $scope.takePicture = function() {
+
             var options = {
                 quality: 50,
                 destinationType: Camera.DestinationType.DATA_URL,
@@ -183,8 +186,20 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
 
         },
         function(err) {
+            console.log(err)
             // error
         };
+
+    $scope.firebaseTest = function() {
+        console.log("THis is working");
+        var ref = new Firebase("https://burning-heat-294.firebaseio.com/users");
+
+        $scope.users = $firebaseArray(ref);
+
+        $scope.users.$add = function() {
+            username: 'test'
+        };
+    }
 })
 
 .controller('PhotoEditCtrl', function($scope, $ionicSideMenuDelegate) {
