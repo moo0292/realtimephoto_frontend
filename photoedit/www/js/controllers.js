@@ -77,6 +77,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     $scope.doSignup = function() {
         console.log('Doing Signup', $scope.signupData);
+        var isNewUser = true;
         var ref = new Firebase('https://burning-heat-294.firebaseio.com/');
         ref.createUser({
             email: $scope.signupData.username,
@@ -99,7 +100,24 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 });
 
             }
+         });
+        ref.onAuth(function(authData) {
+            if (authData && isNewUser) {
+                 // save the user's profile into Firebase so we can list users,
+                // use them in Security and Firebase Rules, and show profiles
+                ref.child("users").child(authData.uid).set({
+                provider: authData.provider,
+                name: getName(authData)
+                });
+            }
         });
+        // find a suitable name based on the meta info given by each provider
+        function getName(authData) {
+          switch(authData.provider) {
+             case 'password':
+               return authData.password.email.replace(/@.*/, '');
+            }
+        }
     }
 
     $scope.goToTakePhoto = function() {
@@ -191,14 +209,33 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         };
 
     $scope.firebaseTest = function() {
-        console.log("THis is working");
-        var ref = new Firebase("https://burning-heat-294.firebaseio.com/users");
+        console.log("This is working");
+        var currentUser = {};
+        var myRef = new Firebase("https://burning-heat-294.firebaseio.com/users")
+        var authData = myRef.getAuth();
 
-        $scope.users = $firebaseArray(ref);
+        if (authData) {
+              console.log("User " + authData.uid + " is logged in with " + authData.provider);
+         } else {
+             console.log("User is logged out");
+        }
 
-        $scope.users.$add = function() {
-            username: 'test'
-        };
+
+        console.log(authData.uid);
+        var userRef = myRef.child("Users");
+        userRef.set({
+            "Photos" : {
+                name: "write3r2",
+                password: "xx3x2"
+            }
+        });
+
+
+   
+     /*$scope.users = $firebaseArray(myRef);
+    $scope.users.$add = function() {
+           name: 'test' };
+    */
     }
 })
 
