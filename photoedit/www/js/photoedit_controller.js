@@ -19,7 +19,11 @@ angular.module('starter.controllers', ['ionic'])
 
     	$ionicSideMenuDelegate.canDragContent(false);
 
-        var canvas = new fabric.Canvas('canv');
+        var canvas = new fabric.Canvas('canv', {
+        	isDrawingMode: true
+        });
+        canvas.freeDrawingBrush.color = "black";
+        canvas.freeDrawingBrush.width = 10;
         var f = fabric.Image.filters;
         var grayFilter = new fabric.Image.filters.Grayscale()
         var invertFilter = new fabric.Image.filters.Invert()

@@ -207,6 +207,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         $ionicSideMenuDelegate.canDragContent(false);
 
         var canvas = new fabric.Canvas('canv');
+        //canvas.isDrawingMode = false;
+        canvas.freeDrawingBrush.color = "black";
+        canvas.freeDrawingBrush.width = 10;
+        
         var f = fabric.Image.filters;
         var grayFilter = new fabric.Image.filters.Grayscale()
         var invertFilter = new fabric.Image.filters.Invert()
@@ -249,7 +253,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         $scope.isInvert = false;
         $scope.isNoise = false;
         $scope.isPixelate = false;
-
+		$scope.isDrawing = false;
 
         $scope.isBright = function() {
             var obj = canvas.getActiveObject();
@@ -360,6 +364,26 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
                 obj.applyFilters(canvas.renderAll.bind(canvas));
                 $scope.isPixelate = true
             }
+        }
+        
+        $scope.changeDRA = function() {
+        	if ($scope.isDrawing == true) {
+        		var d = document.getElementById("draId");
+                d.className = "button button-outline button-royal"
+                //var obj = canvas.getActiveObject();
+                canvas.isDrawingMode = false
+                $scope.isDrawing = false
+        	}
+        	else {
+        		var d = document.getElementById("draId");
+                d.className = "button button-outline button-royal pxl-button-activate"
+                //var obj = canvas.getActiveObject();
+                canvas.isDrawingMode = true
+                //canvas.isDrawingMode = false;
+        		canvas.freeDrawingBrush.color = "black";
+       		 	canvas.freeDrawingBrush.width = 10;
+        		$scope.isDrawing = true
+        	}
         }
 
         $scope.disableAll = function() {
