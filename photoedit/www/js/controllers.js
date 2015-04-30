@@ -187,7 +187,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         };
 })
 
-.controller('PhotoEditCtrl', function($scope, $ionicSideMenuDelegate) {
+.controller('PhotoEditCtrl', function($scope, $ionicSideMenuDelegate, $window) {
     $scope.brightnessValue = 10;
     $scope.decreaseBrightness = -10;
     $scope.noiseValue = 0;
@@ -197,19 +197,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
     $scope.edit = {
         brightness: 50
     }
-
+		
     $scope.changes = {
         bw: false
     }
 
     angular.element(document).ready(function() {
 
+		$scope.sImg = "../tiger.jpg";
         $ionicSideMenuDelegate.canDragContent(false);
 
         var canvas = new fabric.Canvas('canv');
-        //canvas.isDrawingMode = false;
-        canvas.freeDrawingBrush.color = "black";
-        canvas.freeDrawingBrush.width = 10;
+        canvas.setHeight(300);
+		canvas.setWidth($window.innerWidth - 20);
         
         var f = fabric.Image.filters;
         var grayFilter = new fabric.Image.filters.Grayscale()
@@ -370,16 +370,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         	if ($scope.isDrawing == true) {
         		var d = document.getElementById("draId");
                 d.className = "button button-outline button-royal"
-                //var obj = canvas.getActiveObject();
                 canvas.isDrawingMode = false
                 $scope.isDrawing = false
         	}
         	else {
         		var d = document.getElementById("draId");
                 d.className = "button button-outline button-royal pxl-button-activate"
-                //var obj = canvas.getActiveObject();
                 canvas.isDrawingMode = true
-                //canvas.isDrawingMode = false;
         		canvas.freeDrawingBrush.color = "black";
        		 	canvas.freeDrawingBrush.width = 10;
         		$scope.isDrawing = true
@@ -412,7 +409,24 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             $scope.isInvert = false;
             $scope.isNoise = false;
             $scope.isPixelate = false;
-
+        };
+        
+        $scope.clearDrawing = function() {
+        	var obj = canvas.getActiveObject();
+        	if (obj.isType("image")) {
+	        	//do nothing
+        	}
+        	else {
+        		canvas.remove(obj);
+        	}
+        };
+        
+        $scope.saveImage = function() {
+        	$scope.sImg = canvas.toDataURL({
+        		format: 'jpeg',
+        		quality: 1
+        	});
+        	console.log(sImg);
         };
 
         $scope.increaseBrightness = function() {
