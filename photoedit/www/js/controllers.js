@@ -211,7 +211,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
     $scope.firebaseTest = function() {
         console.log("This is working");
         var currentUser = {};
-        var myRef = new Firebase("https://burning-heat-294.firebaseio.com/users")
+        var myRef = new Firebase("https://burning-heat-294.firebaseio.com/")
         var authData = myRef.getAuth();
 
         if (authData) {
@@ -220,19 +220,25 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
              console.log("User is logged out");
         }
 
-
+        //Write data... ....
         console.log(authData.uid);
-        var userRef = myRef.child("Users");
+        var userRef = myRef.child("Photos");
         userRef.set({
             "Photos" : {
-                name: "write3r2",
-                password: "xx3x2"
+                name: "photo3.jpg",
+                size: "3.33",
+                url: "http://google.com"
+
             }
         });
-
-
-   
-     /*$scope.users = $firebaseArray(myRef);
+        
+        var myRef = new Firebase("https://burning-heat-294.firebaseio.com/")
+        myRef.on("value", function(snapshot){
+            snapshot.forEach(function(data){
+                   console.log( data.val());
+                 });
+            });
+         /*$scope.users = $firebaseArray(myRef);
     $scope.users.$add = function() {
            name: 'test' };
     */
