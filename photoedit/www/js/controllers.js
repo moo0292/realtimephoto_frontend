@@ -1,6 +1,6 @@
-angular.module('starter.controllers', ['ionic', 'ngCordova'])
+angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $firebaseArray) {
     // Form data for the login modal
     $scope.loginData = {};
     $scope.signupData = {};
@@ -154,13 +154,40 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             $cordovaCamera.getPicture(options).then(function(imageData) {
                 var image = document.getElementById('myImage');
                 image.src = "data:image/jpeg;base64," + imageData;
-                console.log("working");
+                
+                var ref = new Firebase("https://burning-heat-294.firebaseio.com/photo");
+                
+                var photoArray = $firebaseArray(ref);
+                photoArray.$add({image: imageData}).then(function() {
+                	alert("Image has been uploaded");
+            	});
+            	
+            	var alertPopup = $ionicPopup.alert({
+                    title: 'upload',
+                    template: error
+                });
+                alertPopup.then(function(res) {
+
+                });
+
+                //console.log("working");
             })
 
         },
         function(err) {
             // error
         };
+      	
+      	$scope.firebase = function() {
+      		var ref = new Firebase("https://burning-heat-294.firebaseio.com/photo");
+                
+                $scope.photoArray = $firebaseArray(ref);
+                $scope.photoArray.$add({
+                	text: "This is working"
+            	});
+            	
+            	console.log("Sent to firebass");
+      	}
 
     $scope.getAlbumPic = function() {
             var options = {
