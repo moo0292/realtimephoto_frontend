@@ -232,7 +232,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
             brightness: $scope.decreaseBrightness
         })
 
-        var img = "../tiger.jpg"
+        var img = "http://cdn.cutestpaw.com/wp-content/uploads/2011/11/cute-cat-l.jpg"
         fabric.Image.fromURL(img, function(outImg) {
             canvas.add(outImg);
             canvas.centerObject(outImg);
@@ -428,6 +428,10 @@ angular.module('starter.controllers', ['ionic', 'ngCordova'])
         	});
         	console.log(sImg);
         };
+        
+        $scope.reload = function() {
+        	$window.location.reload();
+        }
 
         $scope.increaseBrightness = function() {
             var obj = canvas.getActiveObject();

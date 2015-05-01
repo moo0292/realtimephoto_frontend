@@ -1,5 +1,5 @@
 <ion-view view-title="photo edit">
-    <ion-content scroll="false">
+    <ion-content scroll="true">
    	<div class="row">
    		<div class="col">
    		<canvas id="canv" style="border:1px solid black;"></canvas>
@@ -47,7 +47,9 @@
         <div class="button-bar">
             <a class="button button-positive" ng-click="saveImage()">Save Image</a>
         </div>
-        <!--<img ng-src="{{sImg}}"/>-->
+        <div class="button-bar">
+            <a class="button button-dark" ng-click="reload()">Reload</a>
+        </div>
     </ion-content>
     
 </ion-view>
