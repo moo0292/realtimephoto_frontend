@@ -92,6 +92,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
                 });
             } else {
+
                 var alertPopup = $ionicPopup.alert({
                     title: 'Signup success!'
                 });
@@ -100,22 +101,32 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 });
 
             }
-         });
+        });
         ref.onAuth(function(authData) {
             if (authData && isNewUser) {
-                 // save the user's profile into Firebase so we can list users,
+                // save the user's profile into Firebase so we can list users,
                 // use them in Security and Firebase Rules, and show profiles
-                ref.child("users").child(authData.uid).set({
-                provider: authData.provider,
-                name: getName(authData)
+                var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
+                $scope.messages = $firebaseArray(refTwo);
+                console.log("Hi");
+                $scope.messages.$add({
+                  userId: authData.uid,
+                  email: $scope.signupData.username,
+                  isInvited: false,
+                  currentRoom: 0
                 });
+                // console.log(authData);
+                // ref.child("users").child(authData.uid).set({
+                //     provider: authData.provider,
+                //     name: getName(authData)
+                // });
             }
         });
         // find a suitable name based on the meta info given by each provider
         function getName(authData) {
-          switch(authData.provider) {
-             case 'password':
-               return authData.password.email.replace(/@.*/, '');
+            switch (authData.provider) {
+                case 'password':
+                    return authData.password.email.replace(/@.*/, '');
             }
         }
     }
@@ -205,7 +216,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         },
         function(err) {
             console.log(err)
-            // error
+                // error
         };
 
     $scope.firebaseTest = function() {
@@ -215,33 +226,29 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         var authData = myRef.getAuth();
 
         if (authData) {
-              console.log("User " + authData.uid + " is logged in with " + authData.provider);
-         } else {
-             console.log("User is logged out");
+            console.log("User " + authData.uid + " is logged in with " + authData.provider);
+        } else {
+            console.log("User is logged out");
         }
 
         //Write data... ....
         console.log(authData.uid);
         var userRef = myRef.child("Photos");
         userRef.set({
-            "Photos" : {
+            "Photos": {
                 name: "photo3.jpg",
                 size: "3.33",
                 url: "http://google.com"
 
             }
         });
-        
+
         var myRef = new Firebase("https://burning-heat-294.firebaseio.com/")
-        myRef.on("value", function(snapshot){
-            snapshot.forEach(function(data){
-                   console.log( data.val());
-                 });
+        myRef.on("value", function(snapshot) {
+            snapshot.forEach(function(data) {
+                console.log(data.val());
             });
-         /*$scope.users = $firebaseArray(myRef);
-    $scope.users.$add = function() {
-           name: 'test' };
-    */
+        });
     }
 })
 
