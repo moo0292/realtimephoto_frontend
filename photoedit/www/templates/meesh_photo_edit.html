@@ -1,6 +1,10 @@
 <ion-view view-title="photo edit">
-    <ion-content scroll="false">
-        <canvas id="canv" style="border:1px solid black;" width="400" height="300"></canvas>
+    <ion-content scroll="true">
+   	<div class="row">
+   		<div class="col">
+   		<canvas id="canv" style="border:1px solid black;"></canvas>
+   		</div>
+   	</div>
         <div class="edit-photo-margin-top row">
             <div class="col col-25 center-text">
                 <a class="button button-clear button-positive button-icon icon ion-minus-round" ng-click="decreaseBrightness()"></a>
@@ -10,6 +14,11 @@
             </div>
             <div class="col col-25 center-text">
                 <a class="button button-clear button-positive button-icon icon ion-plus-round" ng-click="increaseBrightness()"></a>
+            </div>
+        </div>
+        <div class="row">
+        	<div class="col col-20 center-text">
+                <button class="button button-outline button-royal" ng-click="changeDRA()" id="draId">DRAWING</button>
             </div>
         </div>
         <div class="row">
@@ -30,7 +39,17 @@
             </div>
         </div>
         <div class="button-bar">
-            <a class="button button-assertive" ng-click="disableAll()">Disable All</a>
+            <a class="button button-assertive" ng-click="disableAll()">Disable Filters</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-royal" ng-click="clearDrawing()">Clear Selected Drawing</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-positive" ng-click="saveImage()">Save Image</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-dark" ng-click="reload()">Reload</a>
         </div>
     </ion-content>
+    
 </ion-view>
