@@ -92,12 +92,23 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
                 });
             } else {
+                var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
+                $scope.users = $firebaseArray(refTwo);
+                $scope.users.$loaded().then(function(user) {
+                    console.log(user.length)
+                    $scope.users.$add({
+                        userId: user.length + 1,
+                        email: $scope.signupData.username,
+                        isInvited: false,
+                        currentRoom: 0
+                    });
+                });
 
                 var alertPopup = $ionicPopup.alert({
                     title: 'Signup success!'
                 });
                 alertPopup.then(function(res) {
-                    $scope.modalSignup.hide()
+                    $scope.modalSignup.hide();
                 });
 
             }
@@ -106,15 +117,15 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             if (authData && isNewUser) {
                 // save the user's profile into Firebase so we can list users,
                 // use them in Security and Firebase Rules, and show profiles
-                var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
-                $scope.messages = $firebaseArray(refTwo);
-                console.log("Hi");
-                $scope.messages.$add({
-                  userId: authData.uid,
-                  email: $scope.signupData.username,
-                  isInvited: false,
-                  currentRoom: 0
-                });
+                // var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
+                // $scope.messages = $firebaseArray(refTwo);
+                // console.log("Hi");
+                // $scope.messages.$add({
+                //   userId: authData.uid,
+                //   email: $scope.signupData.username,
+                //   isInvited: false,
+                //   currentRoom: 0
+                // });
                 // console.log(authData);
                 // ref.child("users").child(authData.uid).set({
                 //     provider: authData.provider,
@@ -470,7 +481,11 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     })
 })
-
+.controller('AllUsersCtrl', function($scope, $firebaseArray, $firebaseObject) {
+    var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
+    $scope.users = $firebaseArray(refTwo);
+    
+})
 .controller('PlaylistsCtrl', function($scope) {
     $scope.playlists = [{
         title: 'Reggae',

@@ -63,7 +63,8 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova', 'firebase
     url: "/search",
     views: {
       'menuContent': {
-        templateUrl: "templates/search.html"
+        templateUrl: "templates/search.html",
+        controller: 'AllUsersCtrl'
       }
     }
   })
