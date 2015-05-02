@@ -140,13 +140,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     $scope.takePicture = function() {
             var options = {
-                quality: 50,
+                quality: 70,
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 100,
-                targetHeight: 100,
+                targetWidth: 200,
+                targetHeight: 400,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
@@ -259,7 +259,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             brightness: $scope.decreaseBrightness
         })
 
-        var img = "http://cdn.cutestpaw.com/wp-content/uploads/2011/11/cute-cat-l.jpg"
+        var img = "data:image/jpeg;base64," + "/9j/4AAQSkZJRgABAQAASABIAAD/4QBYRXhpZgAATU0AKgAAAAgAAgESAAMAAAABAAEAAIdpAAQAAAABAAAAJgAAAAAAA6ABAAMAAAABAAEAAKACAAQAAAABAAAAZKADAAQAAAABAAAAZAAAAAD/7QA4UGhvdG9zaG9wIDMuMAA4QklNBAQAAAAAAAA4QklNBCUAAAAAABDUHYzZjwCyBOmACZjs+EJ+/8AAEQgAZABkAwEiAAIRAQMRAf/EAB8AAAEFAQEBAQEBAAAAAAAAAAABAgMEBQYHCAkKC//EALUQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5+v/EAB8BAAMBAQEBAQEBAQEAAAAAAAABAgMEBQYHCAkKC//EALURAAIBAgQEAwQHBQQEAAECdwABAgMRBAUhMQYSQVEHYXETIjKBCBRCkaGxwQkjM1LwFWJy0QoWJDThJfEXGBkaJicoKSo1Njc4OTpDREVGR0hJSlNUVVZXWFlaY2RlZmdoaWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uLj5OXm5+jp6vLz9PX29/j5+v/bAEMABgYGBgYGCgYGCg4KCgoOEg4ODg4SFxISEhISFxwXFxcXFxccHBwcHBwcHCIiIiIiIicnJycnLCwsLCwsLCwsLP/bAEMBBwcHCwoLEwoKEy4fGh8uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLi4uLv/dAAQAB//aAAwDAQACEQMRAD8A8bi1GK20GXTrfd591MrTZ4Xy4xlQD3O45PFVLOWNr+18/bBGjoHdc8AHlj3Jrv5fhVrSD91cxt9UYfyJrOk+GviZOnkt/wACYfzWutVY9yXBmFqWtCfXbrVbZGTc7eU0ZCFV6DGPam+TpyeFxK0SG6luyisP9Ysapk8DsTV6TwL4piP/AB7K3+7Iv9cVSfwr4li5awlP+7tb+RNVzxfUVn2LGnR2+ta3pum3JkaLCwYxsYIMngjrjPU1mC7jt4b6yhxsnZcFjllEbEjnj8a6bwhputWnieykltbiIIzEsyMABtPfGK5e4juJFZrlSh3MWLRsDlj3OMdam6baQ9bGqsCaS2k6qZDOJlMrIRtwEcqVB98elVre0ku476aNkVbZDLhs5KlgABgdeRV7RES5W6s7wLcC2sZ3t0bOImXDEgcY71kWE89sszW+0rcRNC4LDlWxngng8DmlF2vbcGXLtxf3No1sAXaOOIhiBiReOD6Hg5pl3bp9mmjudovYLlhJzlnBGCdw4O1h+tegzaH8P7aGz+131xazTwxzgAlwNw/3TjkVR8VaZ4Xmjudb0a9e4k8xTLEuAE3nBY7hnGf1NJVE3Zj5dDzmUyzspOcqqpkeg4H14r1D4dXJuXfQmI3x5ljznOM/MvQfUV5ta2MeoX8Fn5ojSZgm9sHaScDIB5Ga9Usvh54g0W9ju9Nnt5ZoHVlO9lPXkEcjGKyruNrL8yqaZ60ts8Q2elL5LVtmIthiBkjmk8j2FeZY6j//0PQxfnvGfwIP+FPF/H3Rx+AP8jVACiixo2aQvoD13D6qf8KX7RZN1K/iMfzFZmKdTsTc0wLFunl/hilNpaSDG3IPuf8AGs0AHrS+Wp7ClqBfOlWRcybPnYFS3BJB6jJB4NZcvg7QJ1CPaxEAbR+7TgZzjgDvW5aEtboScnGMn2OKtrmp52uo7HG33gTQb9IknhXEEYijwCuEHQcEVnQ/DfRbZJ0hU7biIxOC7dCQcjJPIIFei04VDmyrI8al+EliR+4uJExyPmBwfXladqnw2u7q9e/tbt43kA3bsNlgME5yDzXstG0Vm5spRR5Npfh/xrpNubS21H93uLDcm48gdyx9K0fsXjz/AKCKf9+h/jXoxUUmBWTkVY//0e92UbKueXxSbKzUjVoqbKXYatbKcEquYmxWCU8JVkJThHSuFiWyH+jgejMP/HjVwLUNkv7th6O3881eC1DZRFtNPjSpdvFPUVDY0JtpClT0YrNstFUpzSbKsEc0mKzGf//S9T2Uvl1bC0Fa5lI3aKeylC1Z20BKq5JCEzUix1MEqZY6VwsRWi48wf7f81FXQtQQLiWUf7QP/joq2BSbGNxSgVIFp22oYxgpadigioKIjRTjSVIz/9P2D957frTsOfSpwhpwQ1xnQyuFf0H+fwp21/Qfn/8AWqwEp4SnckgVW9B+dSjI/h/WpgnenbfSi4ECJh2f+9jj6VOopQtShaVwsNApcVJtpdtIZGBQRUmKMVIyuRzRipSKTFSUf//U4cavIPu63cj/AIHLUo1u5HTXrkf8Dlrzb7JJ/ex+JpDay9Q2f+BVxadzvdNnrumfELVNCmYfaW1WJ1+7MzDafUMRn8Olby/GO676ZH+Erf8AxNeCC1m9f/HqettP2Ofxo07i9n5Hv6/GOXvpi/hMf/iamX4xf3tM/Kb/AOwr58Fvc/3sf8Co+z3IOA5/76NK67j9l5H0Uvxhi76a34TD/wCIqwnxhtP4tNk/7+r/APE184/Z7oDhm/M0vkXg5Lt+Zouu4ey8j6VX4w6f/Fp034SL/hUq/F/ST96wuB/wJDXzMIr3++3507y74fxtS+Yez8j6dX4uaIetncj/AL4P9alHxY0A9ba5H4J/8VXzB5eo9nanbdS/vN+lHzH7LyPqD/havh0/8sbn/vlf/iqP+FqeHP8Anjc/98r/APFV8vn+0RwS36UmdR9W/SlbzD2Xkf/V8XzjBwKcQDkkdqZ2H+e1Sdj9K85nsDWwDgAU0nB4ApX+9TG+9SAmRycjinq5yfpUMfU/hUi9T9KTAeJW6Hn60nmMOBimCg9fwoAmjkZs5qRCSuagh71NH938qBoubeSuTilHWnfxmmjrUjQ1gAabgU9+tMoGf//Z"
         fabric.Image.fromURL(img, function(outImg) {
             canvas.add(outImg);
             canvas.centerObject(outImg);
