@@ -299,7 +299,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         };
 
         $scope.changeBW = function() {
-
             if ($scope.isBlackAndWhite == true) {
                 var d = document.getElementById("bwId");
                 d.className = "button button-outline button-dark"
@@ -399,6 +398,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 d.className = "button button-outline button-royal"
                 canvas.isDrawingMode = false
                 $scope.isDrawing = false
+                canvas.setActiveObject(canvas.item(0));
         	}
         	else {
         		var d = document.getElementById("draId");
@@ -446,6 +446,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         	else {
         		canvas.remove(obj);
         	}
+        	canvas.setActiveObject(canvas.item(0));
         };
         
         $scope.saveImage = function() {
