@@ -6,7 +6,69 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('starter', ['ionic', 'starter.controllers','ngCordova', 'firebase'])
 
-.run(function($ionicPlatform) {
+
+.factory('firstTime', [function () {
+  
+  var isFirstTime = true;
+
+  return {
+    getIsFirstTime: function() {
+      return isFirstTime;
+    },
+    setIsFirstTimeToFalse: function() {
+      isFirstTime = false;
+    }
+  };
+}])
+.factory('isLogin', [function () {
+  
+  var isLogIn = false;
+  var currentRoom = '';
+  var email = '';
+  var isInvited = false;
+  var userId = 0;
+  var firebaseId = '';
+
+  return {
+    getIsLogIn: function() {
+      return isLogIn;
+    },
+    setIsLogIn: function(input) {
+      isLogIn = input;
+    },
+    getCurrentRoom: function() {
+      return currentRoom;
+    },
+    setCurrentRoom: function(input) {
+      currentRoom = input;
+    },
+    getEmail: function() {
+      return email;
+    },
+    setEmail: function(input) {
+      email = input;
+    },
+    getIsInvited: function() {
+      return isInvited;
+    },
+    setIsInvited: function(input) {
+      isInvited = input;
+    },
+    getUserId: function() {
+      return userId;
+    },
+    setUserId: function(input) {
+      userId = input;
+    },
+    getFireBaseId: function() {
+      return firebaseId;
+    },
+    setFireBaseId: function(input) {
+      firebaseId = input;
+    }
+  };
+}])
+.run(function($ionicPlatform, firstTime) {
   $ionicPlatform.ready(function() {
     // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
     // for form inputs)
@@ -17,36 +79,10 @@ angular.module('starter', ['ionic', 'starter.controllers','ngCordova', 'firebase
       // org.apache.cordova.statusbar required
       StatusBar.styleDefault();
     }
+
+    console.log("test");
   });
 })
-/*
-.factory('Camera', ['$q', '$base64',
-    function($q, $base64) {
-
-        return {
-            getPicture: function(options) {
-                var q = $q.defer();
-
-                navigator.camera.getPicture(function(result) {
-                    // Do any magic you need
-                    q.resolve(result);
-                }, function(err) {
-                    q.reject(err);
-                }, {
-                    quality: 80,
-                    targetWidth: 320,
-                    targetHeight: 320,
-                    saveToPhotoAlbum: false,
-                    destinationType: Camera.DestinationType.FILE_URI,
-                    encodingType: Camera.EncodingType.JPEG,
-                    sourceType: Camera.PictureSourceType.CAMERA
-                });
-
-                return q.promise;
-            }
-        }
-    }
-])*/
 
 
 .config(function($stateProvider, $urlRouterProvider) {

@@ -1,18 +1,19 @@
 <ion-view view-title="Friends List">
-    <h2 id="center-text">Choose Friend To Edit with</h2>
-    <div class="list list-inset">
-        <label class="item item-input">
-            <i class="icon ion-search placeholder-icon"></i>
-            <input type="text" placeholder="Search">
-        </label>
-    </div>
-    <div ng-repeat="item in users">
-        <div class="list card">
-            <div class="item item-avatar">
-                <img ng-src="../img/Marty.jpg">
-                <h2>{{item.email}}</h2>
+    <ion-content>
+        <h2 id="center-text">Choose Friend To Edit with</h2>
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search">
+            </label>
+        </div>
+        <div ng-repeat="item in users">
+            <div class="list card" ng-click="selectPerson(item.$id)">
+                <div class="item item-avatar">
+                    <img ng-src="../img/Marty.jpg">
+                    <h2>{{item.email}}</h2>
+                </div>
             </div>
         </div>
-    </div>
     </ion-content>
 </ion-view>
