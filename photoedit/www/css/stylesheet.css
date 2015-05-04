@@ -1,23 +1,42 @@
-.titleFont {
-    /*font of title*/
-    
-    font-size: 40px;
-    color: black;
-}
+
 #avtC {
     /*avatar color*/
-    
-    background: #CCFFFF;
+    background: #68C3A3;
 }
-.titleFont{/*font of title*/
-	font-size:29px;
+
+.titleFont{
+    /*page wide font of title*/
+    font-family: 'Shadows Into Light', cursive;
+	font-size:30px;
 	color:black;
+    text-align: center;
+}
+
+.homeUserFont{
+    /*fonts of each user in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 22px;
+    color:black;
+}
+.homeDateFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 10px;
+    color:black;
+}
+
+.loginFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 17px;
+    color:black;
 }
 
 #backgroundC {
-    /*background color*/
-    
-    background: black;
+    /*page wide background color*/
+    background: #CCEBDC !important;
 }
 
 #rowSpaceing {
@@ -30,37 +49,35 @@
 }
 
 .menu-margin-right {
+
     margin-right: 1em;
 }
 
-#backgroundC{ /*background color for home*/
-	background:#000000;
+.platform-ios.platform-cordova:not(.fullscreen) .bar {
+    background:#68C3A3 ;
 }
 
 #backgroundMenu{ /*background of the menu*/
-	background:#ACC4C8;
+	background:#68C3A3;
 }
-
 
 .menuButton{
-	background:#C2D8DC;
+	background:#68C3A3;
 	color:#115377;
+    height: 62px;
 }
 
 
-#menuLink a { background:#C2D8DC;}
+#menuLink a { background:#68C3A3;}
 #menuLink a { color:#115377;}
+#menuLink a {height: 62px}
 #menuLink a:active {background:white;}
 
-
-
-#rowSpaceing{
-	margin-top: 60px;
-}
 
 .center-text {
     text-align: center;
 }
+
 
 .center-vertical {
     display: table-cell;

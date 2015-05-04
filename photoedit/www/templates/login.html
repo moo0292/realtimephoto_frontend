@@ -1,8 +1,8 @@
-<ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">Login</h1>
+<ion-modal-view id="backgroundC">
+    <ion-header-bar id="backgroundC">
+        <div class="titleFont">Login</div>
         <div class="buttons">
-            <button class="button button-clear" ng-click="closeLogin()">Close</button>
+            <button class="button button-clear titleFont" ng-click="closeLogin()" style="color:black">Close</button>
         </div>
     </ion-header-bar>
     <ion-content>
@@ -23,7 +23,7 @@
         </form>
         <!-- Sign up text -->
         <div class="center-text">
-            <p>Not yet a user? 
+            <p class="loginFont">Not yet a user? 
               <a class="signup-color" ng-click="openSignup()">Click here to Signup</a>
             </p>
         </div>

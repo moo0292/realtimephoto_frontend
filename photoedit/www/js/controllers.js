@@ -109,6 +109,9 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     };
 
+
+
+
     // Perform the login action when the user submits the login form
     $scope.doLogin = function() {
         console.log('Doing login', $scope.loginData);
