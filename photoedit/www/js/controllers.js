@@ -1,21 +1,25 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
-.controller('AppCtrl', function($firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin) {
+.controller('AppCtrl', function($ionicNavBarDelegate,$firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin, $ionicBackdrop) {
     // Form data for the login modal
 
     $ionicSideMenuDelegate.canDragContent(true);
+    $ionicNavBarDelegate.showBackButton(false);
+
     $scope.loginData = {};
     $scope.signupData = {};
     $scope.currentPhoto = '';
     $scope.login = isLogin.getIsLogIn();
     $scope.currentUser = '';
 
+    var refCurrentPhoto = new Firebase('https://burning-heat-294.firebaseio.com/allphotos');
+    $scope.allCurrentRoom = $firebaseArray(refCurrentPhoto);
+
+
     $scope.$watch('login', function() {
         if ($scope.login == true) {
-            console.log("Got here");
             $scope.datas = new Firebase('https://burning-heat-294.firebaseio.com/users/' + isLogin.getFireBaseId());
             $scope.datas.on('value', function(childSnapshot) {
-                console.log(childSnapshot.val().isInvited);
                 if (childSnapshot.val().isInvited == true) {
                     var confirmPopup = $ionicPopup.confirm({
                         title: 'Someone wants to edit photo with you!',
@@ -26,7 +30,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                             $location.path('/app/meesh_photo_edit');
                         } else {
                             //if not then change this to false
-                            console.log("1 here");
                             var refThree = new Firebase('https://burning-heat-294.firebaseio.com/users/' + isLogin.getFireBaseId());
                             $scope.usersel = $firebaseObject(refThree);
                             $scope.usersel.$loaded().then(function(user) {
@@ -35,48 +38,12 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                                 user.$save();
                             });
                         }
+                        $ionicBackdrop.release();
                     })
                 }
             });
         }
     });
-    //listen to child changed
-
-    // ref.on("child_changed", function(snapshot) {
-    //     var changedPost = snapshot.val();
-    //     //if the user is login then compare the value
-    //     // console.log(changedPost.userId == );
-
-    //     if (isLogin.getIsLogIn()) {
-    //         //execute if user is login
-    //         if (changedPost.userId == isLogin.getUserId()) {
-    //             //execute if the login id matches with the change one
-    //             console.log("change post invited");
-
-    //             if (changedPost.isInvited == true) {
-    //                 //execute if the invite changes
-    //                 // console.log($scope.users[0]);
-    //                 // $scope.users[0].currentRoom = 10;
-    //                 // $scope.users.$save($scope.users[0])
-
-    //                 //do you want to accept editing?
-    //                 var confirmPopup = $ionicPopup.confirm({
-    //                     title: 'Someone wants to edit photo with you!',
-    //                     template: 'Click accept to edit the photo!'
-    //                 });
-    //                 confirmPopup.then(function(res) {
-    //                     if (res) {
-    //                         // go to the editing page
-    //                         $location.path('/app/meesh_photo_edit');
-    //                     } else {
-    //                         //have to cancel everything
-    //                     }
-    //                 });
-    //             }
-    //         }
-    //     }
-    // });
-
 
 
     // Create the login modal that we will use later
@@ -95,6 +62,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
     // Triggered in the login modal to close it
     $scope.closeLogin = function() {
         $scope.modal.hide();
+
     };
 
     // Open the login modal
@@ -159,6 +127,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                     });
                     alertPopup.then(function(res) {
                         $scope.modal.hide();
+
                     });
                 })
 
@@ -410,39 +379,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     $scope.firebaseTest = function() {
         $scope.currentUser = '';
-        // var currentUser = {};
-        // var myRef = new Firebase("https://burning-heat-294.firebaseio.com/")
-        // var authData = myRef.getAuth();
-
-        // if (authData) {
-        //     console.log("User " + authData.uid + " is logged in with " + authData.provider);
-        // } else {
-        //     console.log("User is logged out");
-        // }
-
-        // //Write data... ....
-        // console.log(authData.uid);
-        // var userRef = myRef.child("Photos");
-        // userRef.set({
-        //     "Photos": {
-        //         name: "photo3.jpg",
-        //         size: "3.33",
-        //         url: "http://google.com"
-
-        //     }
-        // });
-
-        // var myRef = new Firebase("https://burning-heat-294.firebaseio.com/")
-        // myRef.on("value", function(snapshot) {
-        //     snapshot.forEach(function(data) {
-        //         console.log(data.val());
-        //     });
-        // });
     }
 })
 
-.controller('PhotoEditCtrl', function($scope, $ionicSideMenuDelegate, $window, firstTime, $location, $state, isLogin, $firebaseArray, $firebaseObject) {
+.controller('PhotoEditCtrl', function($ionicPopup, $scope, $ionicSideMenuDelegate, $window, firstTime, $location, $state, isLogin, $firebaseArray, $firebaseObject, $ionicNavBarDelegate) {
 
+
+        $ionicNavBarDelegate.showBackButton(false);
 
         console.log(isLogin.getIsLogIn());
         console.log("I'm a controller");
@@ -467,7 +410,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             bw: false
         }
 
-
+        $scope.changeFirst = true;
 
         angular.element(document).ready(function() {
 
@@ -503,27 +446,99 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             $scope.usersel = $firebaseObject(refThree);
             $scope.usersel.$loaded().then(function(user) {
                 //get current user current room
-                var cR = user.currentRoom;
-                console.log(cR);
+
+                $scope.cR = user.currentRoom;
                 //after you get the firebase id get the room number
-                $scope.imageM = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + cR);
+                $scope.imageM = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
                 $scope.imageM.on('value', function(childSnapshot) {
-                    console.log(childSnapshot);
-                    $scope.sImg = childSnapshot.val().image;
-                    var img = "data:image/jpeg;base64," + $scope.sImg;
-                    fabric.Image.fromURL(img, function(outImg) {
-                        canvas.add(outImg);
-                        canvas.centerObject(outImg);
-                        canvas.item(0).lockMovementY = true;
-                        canvas.item(0).lockMovementX = true;
-                        canvas.item(0).lockScalingX = true;
-                        canvas.item(0).lockScalingY = true;
-                        canvas.item(0).lockRotation = true;
-                        canvas.item(0).hasControls = false;
-                        canvas.item(0).hasBorders = false;
-                        canvas.renderAll();
-                        canvas.setActiveObject(outImg);
-                    });
+                    if ($scope.changeFirst == true) {
+                        console.log(childSnapshot.val());
+                        $scope.sImg = childSnapshot.val().image;
+                        var img = "data:image/jpeg;base64," + $scope.sImg;
+                        fabric.Image.fromURL(img, function(outImg) {
+                            canvas.add(outImg);
+                            canvas.centerObject(outImg);
+                            canvas.item(0).lockMovementY = true;
+                            canvas.item(0).lockMovementX = true;
+                            canvas.item(0).lockScalingX = true;
+                            canvas.item(0).lockScalingY = true;
+                            canvas.item(0).lockRotation = true;
+                            canvas.item(0).hasControls = false;
+                            canvas.item(0).hasBorders = false;
+                            canvas.renderAll();
+                            canvas.setActiveObject(outImg);
+                        });
+
+                        $scope.changeFirst = false;
+                    }
+
+                    var obj = canvas.getActiveObject();
+                    obj.filters = [];
+                    obj.applyFilters(canvas.renderAll.bind(canvas));
+
+                    if (childSnapshot.val().isBw == true) {
+                        var d = document.getElementById("bwId");
+                        d.className = "button button-outline button-dark bw-button-activate"
+                        var obj = canvas.getActiveObject();
+                        console.log(obj);
+                        obj.filters.push(grayFilter);
+                    } else if (childSnapshot.val().isBw == false) {
+                        var d = document.getElementById("bwId");
+                        d.className = "button button-outline button-dark"
+                        var obj = canvas.getActiveObject();
+                        fabric.util.removeFromArray(obj.filters, grayFilter);
+                    }
+
+                    if (childSnapshot.val().isInv == true) {
+                        var d = document.getElementById("invId");
+                        d.className = "button button-outline button-stable inv-button-activate"
+                        var obj = canvas.getActiveObject();
+                        obj.filters.push(invertFilter);
+                    } else if (childSnapshot.val().isInv == false) {
+                        var d = document.getElementById("invId");
+                        d.className = "button button-outline button-stable"
+                        var obj = canvas.getActiveObject();
+                        fabric.util.removeFromArray(obj.filters, invertFilter);
+                    }
+
+                    if (childSnapshot.val().isSep == true) {
+                        var d = document.getElementById("sepId");
+                        d.className = "button button-outline button-positive sep-button-activate"
+                        var obj = canvas.getActiveObject();
+                        obj.filters.push(sepiaFilter);
+                    } else if (childSnapshot.val().isSep == false) {
+                        var d = document.getElementById("sepId");
+                        d.className = "button button-outline button-positive"
+                        var obj = canvas.getActiveObject();
+                        fabric.util.removeFromArray(obj.filters, sepiaFilter);
+                    }
+
+                    if (childSnapshot.val().isNoi == true) {
+                        var d = document.getElementById("noiId");
+                        d.className = "button button-outline button-balanced noi-button-activate"
+                        var obj = canvas.getActiveObject();
+                        obj.filters.push(noiseFilter);
+                    } else if (childSnapshot.val().isNoi == false) {
+                        var d = document.getElementById("noiId");
+                        d.className = "button button-outline button-balanced"
+                        var obj = canvas.getActiveObject();
+                        fabric.util.removeFromArray(obj.filters, noiseFilter);
+                    }
+
+                    if (childSnapshot.val().isPxl == true) {
+                        var d = document.getElementById("pxlId");
+                        d.className = "button button-outline button-royal pxl-button-activate"
+                        var obj = canvas.getActiveObject();
+                        obj.filters.push(pixelateFilter);
+                    } else if (childSnapshot.val().isPxl == false) {
+                        var d = document.getElementById("pxlId");
+                        d.className = "button button-outline button-royal"
+                        var obj = canvas.getActiveObject();
+                        fabric.util.removeFromArray(obj.filters, pixelateFilter);
+
+                    }
+
+                    obj.applyFilters(canvas.renderAll.bind(canvas));
                 });
             });
 
@@ -541,6 +556,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             $scope.isPixelate = false;
             $scope.isDrawing = false;
 
+            var fb = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
 
             $scope.isBright = function() {
                 var obj = canvas.getActiveObject();
@@ -560,97 +576,81 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
             $scope.changeBW = function() {
 
-                if ($scope.isBlackAndWhite == true) {
-                    var d = document.getElementById("bwId");
-                    d.className = "button button-outline button-dark"
-                    var obj = canvas.getActiveObject();
-                    fabric.util.removeFromArray(obj.filters, grayFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isBlackAndWhite = false
-                } else {
-                    var d = document.getElementById("bwId");
-                    d.className = "button button-outline button-dark bw-button-activate"
-                    var obj = canvas.getActiveObject();
-                    console.log(obj);
-                    obj.filters.push(grayFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isBlackAndWhite = true
-                }
+                //call the database and change value
 
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    if (user.isBw == true) {
+                        user.isBw = false;
+                        user.$save();
+                    } else {
+                        user.isBw = true;
+                        user.$save();
+                    };
 
+                });
             }
 
             $scope.changeINV = function() {
-                if ($scope.isInvert == true) {
-                    var d = document.getElementById("invId");
-                    d.className = "button button-outline button-stable"
-                    var obj = canvas.getActiveObject();
-                    fabric.util.removeFromArray(obj.filters, invertFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isInvert = false
-                } else {
-                    var d = document.getElementById("invId");
-                    d.className = "button button-outline button-stable inv-button-activate"
-                    var obj = canvas.getActiveObject();
-                    obj.filters.push(invertFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isInvert = true
-                }
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    if (user.isInv == true) {
+                        user.isInv = false;
+                        user.$save();
+                    } else {
+                        user.isInv = true;
+                        user.$save();
+                    };
+
+                });
 
             }
 
             $scope.changeSEP = function() {
-                if ($scope.isSepia == true) {
-                    var d = document.getElementById("sepId");
-                    d.className = "button button-outline button-positive"
-                    var obj = canvas.getActiveObject();
-                    fabric.util.removeFromArray(obj.filters, sepiaFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isSepia = false
-                } else {
-                    var d = document.getElementById("sepId");
-                    d.className = "button button-outline button-positive sep-button-activate"
-                    var obj = canvas.getActiveObject();
-                    obj.filters.push(sepiaFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isSepia = true
-                }
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    if (user.isSep == true) {
+                        user.isSep = false;
+                        user.$save();
+                    } else {
+                        user.isSep = true;
+                        user.$save();
+                    };
+
+                });
             }
 
             $scope.changeNOI = function() {
-                if ($scope.isNoise == true) {
-                    var d = document.getElementById("noiId");
-                    d.className = "button button-outline button-balanced"
-                    var obj = canvas.getActiveObject();
-                    fabric.util.removeFromArray(obj.filters, noiseFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isNoise = false
-                } else {
-                    var d = document.getElementById("noiId");
-                    d.className = "button button-outline button-balanced noi-button-activate"
-                    var obj = canvas.getActiveObject();
-                    obj.filters.push(noiseFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isNoise = true
-                }
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    if (user.isNoi == true) {
+                        user.isNoi = false;
+                        user.$save();
+                    } else {
+                        user.isNoi = true;
+                        user.$save();
+                    };
+
+                });
             }
 
             $scope.changePXL = function() {
-                if ($scope.isPixelate == true) {
-                    var d = document.getElementById("pxlId");
-                    d.className = "button button-outline button-royal"
-                    var obj = canvas.getActiveObject();
-                    fabric.util.removeFromArray(obj.filters, pixelateFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isPixelate = false
-                } else {
-                    var d = document.getElementById("pxlId");
-                    d.className = "button button-outline button-royal pxl-button-activate"
-                    var obj = canvas.getActiveObject();
-                    obj.filters.push(pixelateFilter);
-                    obj.applyFilters(canvas.renderAll.bind(canvas));
-                    $scope.isPixelate = true
-                }
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    if (user.isPxl == true) {
+                        user.isPxl = false;
+                        user.$save();
+                    } else {
+                        user.isPxl = true;
+                        user.$save();
+                    };
+
+                });
             }
 
             $scope.changeDRA = function() {
@@ -659,6 +659,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                     d.className = "button button-outline button-royal"
                     canvas.isDrawingMode = false
                     $scope.isDrawing = false
+                    canvas.setActiveObject(canvas.item(0));
                 } else {
                     var d = document.getElementById("draId");
                     d.className = "button button-outline button-royal pxl-button-activate"
@@ -670,31 +671,19 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             }
 
             $scope.disableAll = function() {
-                var obj = canvas.getActiveObject();
-                obj.filters = [];
-                obj.applyFilters(canvas.renderAll.bind(canvas));
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/rooms/' + $scope.cR);
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
 
-                //change back all the button color
-                var d = document.getElementById("bwId");
-                d.className = "button button-outline button-dark"
+                    user.isBw = false;
+                    user.isInv = false;
+                    user.isSep = false;
+                    user.isNoi = false;
+                    user.isPxl = false;
+                    user.$save();
 
-                var d = document.getElementById("invId");
-                d.className = "button button-outline button-stable"
 
-                var d = document.getElementById("sepId");
-                d.className = "button button-outline button-positive"
-
-                var d = document.getElementById("noiId");
-                d.className = "button button-outline button-balanced"
-
-                var d = document.getElementById("pxlId");
-                d.className = "button button-outline button-royal"
-
-                $scope.isBlackAndWhite = false;
-                $scope.isSepia = false;
-                $scope.isInvert = false;
-                $scope.isNoise = false;
-                $scope.isPixelate = false;
+                });
             };
 
             $scope.clearDrawing = function() {
@@ -704,6 +693,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 } else {
                     canvas.remove(obj);
                 }
+                canvas.setActiveObject(canvas.item(0));
             };
 
             $scope.saveImage = function() {
@@ -711,7 +701,50 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                     format: 'jpeg',
                     quality: 1
                 });
-                console.log(sImg);
+
+                //first time this just push to the main all photo page
+                var refAllPhoto = new Firebase('https://burning-heat-294.firebaseio.com/allphotos');
+                $scope.allPhoto = $firebaseArray(refAllPhoto);
+                $scope.allPhoto.$loaded().then(function(photo) {
+                    var today = new Date();
+                    var dd = today.getDate();
+                    var mm = today.getMonth() + 1; //January is 0!
+                    var yyyy = today.getFullYear();
+
+                    if (dd < 10) {
+                        dd = '0' + dd
+                    }
+
+                    if (mm < 10) {
+                        mm = '0' + mm
+                    }
+
+                    today = mm + '/' + dd + '/' + yyyy;
+                    photo.$add({
+                        url: $scope.sImg,
+                        artist: isLogin.getEmail(),
+                        currentDate: today
+                    }).then(function(ref) {
+                        var refThree = new Firebase('https://burning-heat-294.firebaseio.com/users/' + isLogin.getFireBaseId());
+                        $scope.usersel = $firebaseObject(refThree);
+                        $scope.usersel.$loaded().then(function(user) {
+                            user.isInvited = false;
+                            user.currentRoom = 0;
+                            user.$save();
+
+                            $location.path('/app');
+
+                            var alertPopup = $ionicPopup.alert({
+                                title: 'Image upload success!'
+                            });
+                            alertPopup.then(function(res) {
+                                $scope.modalSignup.hide();
+                            });
+                        });
+                    });
+
+                });
+
             };
 
             $scope.reload = function() {
@@ -733,8 +766,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         })
     })
     .controller('AllUsersCtrl', function($scope, $firebaseArray, $firebaseObject, isLogin, $location) {
-        // var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
-        // $scope.users = $firebaseArray(refTwo);
+        var refTwo = new Firebase('https://burning-heat-294.firebaseio.com/users');
+        $scope.users = $firebaseArray(refTwo);
 
         $scope.selectPerson = function(input) {
             var refThree = new Firebase('https://burning-heat-294.firebaseio.com/users/' + input);
