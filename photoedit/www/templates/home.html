@@ -2,7 +2,7 @@
     <ion-nav-title class="titleFont">Home
     </ion-nav-title>
     <ion-content id="backgroundC">
-        <div ng-repeat="item in allCurrentRoom">
+        <div ng-repeat="item in allCurrentRoom.slice().reverse()">
             <div class="list card">
                 <div id="avtC" class="item item-avatar">
                     <img ng-src="img/Homer_Simpson2.jpg">

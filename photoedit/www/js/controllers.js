@@ -1,9 +1,9 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
-.controller('AppCtrl', function($ionicNavBarDelegate,$firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin, $ionicBackdrop) {
+.controller('AppCtrl', function($ionicNavBarDelegate, $firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin, $ionicBackdrop) {
     // Form data for the login modal
 
-    $ionicSideMenuDelegate.canDragContent(true);
+
     $ionicNavBarDelegate.showBackButton(false);
 
     $scope.loginData = {};
@@ -354,21 +354,22 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
     $scope.getAlbumPic = function() {
             var options = {
-                quality: 50,
+                quality: 70,
                 destinationType: Camera.DestinationType.DATA_URL,
                 sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 100,
-                targetHeight: 100,
+                targetWidth: 200,
+                targetHeight: 400,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
 
             $cordovaCamera.getPicture(options).then(function(imageData) {
+                $scope.currentPhoto = imageData;
+
                 var image = document.getElementById('myImage');
                 image.src = "data:image/jpeg;base64," + imageData;
-                console.log("working");
             })
 
         },
@@ -415,7 +416,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
         angular.element(document).ready(function() {
 
             $scope.sImg = '';
-            $ionicSideMenuDelegate.canDragContent(false);
 
             var canvas = new fabric.Canvas('canv');
             canvas.setHeight(300);
