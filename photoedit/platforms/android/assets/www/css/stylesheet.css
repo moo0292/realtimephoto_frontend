@@ -1,0 +1,113 @@
+.titleFont {
+    /*font of title*/
+    
+    font-size: 40px;
+    color: black;
+}
+#avtC {
+    /*avatar color*/
+    
+    background: #CCFFFF;
+}
+.titleFont{/*font of title*/
+	font-size:29px;
+	color:black;
+}
+
+#backgroundC {
+    /*background color*/
+    
+    background: black;
+}
+
+#rowSpaceing {
+    margin-top: 60px;
+}
+
+
+#center-text {
+    text-align: center;
+}
+
+.menu-margin-right {
+    margin-right: 1em;
+}
+
+#backgroundC{ /*background color for home*/
+	background:#000000;
+}
+
+#backgroundMenu{ /*background of the menu*/
+	background:#ACC4C8;
+}
+
+
+.menuButton{
+	background:#C2D8DC;
+	color:#115377;
+}
+
+
+#menuLink a { background:#C2D8DC;}
+#menuLink a { color:#115377;}
+#menuLink a:active {background:white;}
+
+
+
+#rowSpaceing{
+	margin-top: 60px;
+}
+
+.center-text {
+    text-align: center;
+}
+
+.center-vertical {
+    display: table-cell;
+    vertical-align: middle;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+#brightness-text {
+    margin-top: 10px;
+    color: #59ABE3;
+}
+
+.bw-button-activate {
+    background-color: #444 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.inv-button-activate {
+    background-color: #b2b2b2 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.sep-button-activate {
+    background-color: #387ef5 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.noi-button-activate {
+    background-color: #33cd5f !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.pxl-button-activate {
+    background-color: #886aea !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+canvas {
+	text-align: center;
+}
+
+.signup-color {
+	color: #387ef5;
+}
