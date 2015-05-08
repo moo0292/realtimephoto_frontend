@@ -5,10 +5,10 @@
         <div class="list list-inset">
             <label class="item item-input">
                 <i class="icon ion-search placeholder-icon"></i>
-                <input type="text" placeholder="Search">
+                <input type="text" placeholder="Search" ng-model="searchText">
             </label>
         </div>
-        <div ng-repeat="item in users">
+        <div ng-repeat="item in users | filter:searchText">
             <div class="list card" ng-click="selectPerson(item.$id)">
                 <div class="item item-avatar">
                     <img ng-src="../img/Marty.jpg">
