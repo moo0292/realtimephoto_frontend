@@ -659,14 +659,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             $scope.changeDRA = function() {
                 if ($scope.isDrawing == true) {
                     var d = document.getElementById("draId");
-                    d.className = "button button-outline button-royal"
+                    d.className = "button button-outline button-royal button-full"
                     canvas.isDrawingMode = false
                     $scope.isDrawing = false
                     canvas.setActiveObject(canvas.item(0));
                     $ionicScrollDelegate.freezeAllScrolls(false);
                 } else {
                     var d = document.getElementById("draId");
-                    d.className = "button button-outline button-royal pxl-button-activate"
+                    d.className = "button button-outline button-royal pxl-button-activate button-full"
                     canvas.isDrawingMode = true
                     canvas.freeDrawingBrush.color = "black";
                     canvas.freeDrawingBrush.width = 10;
