@@ -654,6 +654,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             }
 
             $scope.changeDRA = function() {
+                //hi
                 if ($scope.isDrawing == true) {
                     var d = document.getElementById("draId");
                     d.className = "button button-outline button-royal"
