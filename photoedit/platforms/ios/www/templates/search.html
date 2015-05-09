@@ -1,5 +1,20 @@
-<ion-view view-title="Search">
-  <ion-content>
-    <h1>Search</h1>
-  </ion-content>
+<ion-view>
+<ion-nav-title class="titleFont">Friends List</ion-nav-title>
+    <ion-content id="backgroundC">
+       <!-- <h2 id="center-text">Choose Friend To Edit with</h2>-->
+        <div class="list list-inset">
+            <label class="item item-input">
+                <i class="icon ion-search placeholder-icon"></i>
+                <input type="text" placeholder="Search" ng-model="searchText">
+            </label>
+        </div>
+        <div ng-repeat="item in users | filter:searchText">
+            <div class="list card" ng-click="selectPerson(item.$id)">
+                <div class="item item-avatar">
+                    <img ng-src="../img/Marty.jpg">
+                    <h2>{{item.email}}</h2>
+                </div>
+            </div>
+        </div>
+    </ion-content>
 </ion-view>

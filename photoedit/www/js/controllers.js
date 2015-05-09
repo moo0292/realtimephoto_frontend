@@ -278,8 +278,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 200,
-                targetHeight: 400,
+                targetWidth: 300,
+                targetHeight: 600,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
@@ -362,8 +362,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 200,
-                targetHeight: 400,
+                targetWidth: 300,
+                targetHeight: 600,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
