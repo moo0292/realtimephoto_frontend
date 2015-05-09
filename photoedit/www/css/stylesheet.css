@@ -1,28 +1,65 @@
-.titleFont {
-    /*font of title*/
-    
-    font-size: 40px;
-    color: black;
-}
+
 #avtC {
     /*avatar color*/
-    
-    background: #CCFFFF;
+    background: #68C3A3;
 }
-.titleFont{/*font of title*/
-	font-size:29px;
-	color:black;
+
+#loginBackground{
+     background: #68C3A3 !important;
+}
+
+
+.titleFont{
+    /*page wide font of title*/
+    font-family: 'Shadows Into Light', cursive;
+	font-size:30px !important;
+	color:#115377;
+    text-align: center;
+}
+
+.editPhotoBtn{
+
+    height:130px !important;
+}
+
+.navigationBtn{
+    color:#115377 !important;
+}
+
+.userInfoFont{
+    font-family: 'Shadows Into Light', cursive;
+    font-size:20px !important;
+    color:white;
+    text-align: left;
+}
+
+.homeUserFont{
+    /*fonts of each user in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 22px;
+    color:#115377;
+}
+.homeDateFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 20px !important;
+    color:#115377;
+}
+
+.loginFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 20px !important;
+    color:#115377 !important;
 }
 
 #backgroundC {
-    /*background color*/
-    
-    background: black;
+    /*page wide background color*/
+    background: #CCEBDC !important;
 }
 
-#rowSpaceing {
-    margin-top: 60px;
-}
 
 
 #center-text {
@@ -30,37 +67,39 @@
 }
 
 .menu-margin-right {
+
     margin-right: 1em;
 }
 
-#backgroundC{ /*background color for home*/
-	background:#000000;
+.platform-ios.platform-cordova:not(.fullscreen) .bar {
+    background:#68C3A3 ;
 }
 
 #backgroundMenu{ /*background of the menu*/
-	background:#ACC4C8;
+	background:#68C3A3;
 }
-
 
 .menuButton{
-	background:#C2D8DC;
+	background:#68C3A3;
 	color:#115377;
+    font-family: 'Shadows Into Light', cursive;
+    height: 62px;
+    font-size:30px !important;
 }
 
 
-#menuLink a { background:#C2D8DC;}
+#menuLink a { background:#68C3A3;}
 #menuLink a { color:#115377;}
+#menuLink a {height: 62px}
+#menuLink a {font-family: 'Shadows Into Light', cursive;}
+#menuLink a {font-size: 30px !important}
 #menuLink a:active {background:white;}
 
-
-
-#rowSpaceing{
-	margin-top: 60px;
-}
 
 .center-text {
     text-align: center;
 }
+
 
 .center-vertical {
     display: table-cell;

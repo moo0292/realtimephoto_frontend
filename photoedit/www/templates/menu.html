@@ -1,38 +1,28 @@
 <ion-side-menus enable-menu-with-back-views="false">
   <ion-side-menu-content>
-
-
-
-
     <ion-nav-bar class="bar-stable">
-
-      <ion-nav-back-button>
-      </ion-nav-back-button>
       <ion-nav-buttons side="left" >
-        <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+        <button class="button button-icon button-clear ion-navicon navigationBtn" menu-toggle="left">
         </button>
       </ion-nav-buttons>
     </ion-nav-bar>
     <ion-nav-view name="menuContent"></ion-nav-view>
   </ion-side-menu-content>
-
   <ion-side-menu side="left" id="backgroundMenu">
-    
-
     <ion-content>
-      <ion-list >
+      <ion-list>
         <!-- Change the login to My Home when log in 
         <ion-item nav-clear menu-close ng-click="login()">
           Login
         </ion-item>-->
-        <ion-item nav-clear menu-close a href="#/app/home" id="menuLink">
+        <ion-item nav-clear menu-close href="#/app/home" id="menuLink">
           <i class="icon ion-home menu-margin-right"></i> Home
         </ion-item>
         <ion-item nav-clear menu-close ng-click="loginFunc()" class="menuButton" >
-          <i class="icon ion-person menu-margin-right"></i>Login
+          <i class="icon ion-person menu-margin-right "></i>Login
         </ion-item>
         <ion-item nav-clear menu-close href="#/app/edit_main" id="menuLink">
-          <i class="icon ion-image menu-margin-right"></i>Photo Edit
+          <i class="icon ion-image menu-margin-right "></i>Photo Edit
         </ion-item>
       </ion-list>
     </ion-content>

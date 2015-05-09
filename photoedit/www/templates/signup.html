@@ -1,23 +1,23 @@
-<ion-modal-view>
-    <ion-header-bar>
-        <h1 class="title">Signup</h1>
+<ion-modal-view id="backgroundC">
+    <ion-header-bar id="backgroundC">
+        <div class="title titleFont"style="margin-top:5px">Signup</div>
         <div class="buttons">
-            <button class="button button-clear" ng-click="closeSignup()">Close</button>
+            <button class="button button-clear loginFont" ng-click="closeSignup()" style="margin-top:1px">Close</button>
         </div>
     </ion-header-bar>
     <ion-content>
-        <form ng-submit="doSignup()">
+        <form ng-submit="doSignup()" style="margin-top:25px">
             <div class="list">
-                <label class="item item-input">
-                    <span class="input-label">Email</span>
+                <label class="item item-input" id="loginBackground">
+                    <span class="input-label userInfoFont">Email</span>
                     <input type="text" ng-model="signupData.username">
                 </label>
-                <label class="item item-input">
-                    <span class="input-label">Password</span>
+                <label class="item item-input" id="loginBackground">
+                    <span class="input-label userInfoFont">Password</span>
                     <input type="password" ng-model="signupData.password">
                 </label>
-                <label class="item">
-                    <button class="button button-block button-positive" type="submit">Signup</button>
+                <label class="item" id="loginBackground">
+                    <button class="button button-block button-positive titleFont" type="submit">Signup</button>
                 </label>
             </div>
         </form>
