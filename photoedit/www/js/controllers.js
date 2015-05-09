@@ -1,10 +1,7 @@
 angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 
-.controller('AppCtrl', function($ionicNavBarDelegate, $firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin, $ionicBackdrop) {
+.controller('AppCtrl', function($firebase, $scope, $ionicModal, $timeout, $location, $ionicPopup, $cordovaCamera, $ionicSideMenuDelegate, $firebaseArray, $firebaseObject, isLogin, $ionicBackdrop) {
     // Form data for the login modal
-
-
-    $ionicNavBarDelegate.showBackButton(false);
 
     $scope.loginData = {};
     $scope.signupData = {};
@@ -278,8 +275,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 sourceType: Camera.PictureSourceType.CAMERA,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 200,
-                targetHeight: 400,
+                targetWidth: 300,
+                targetHeight: 600,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
@@ -362,8 +359,8 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                 sourceType: Camera.PictureSourceType.SAVEDPHOTOALBUM,
                 allowEdit: true,
                 encodingType: Camera.EncodingType.JPEG,
-                targetWidth: 200,
-                targetHeight: 400,
+                targetWidth: 300,
+                targetHeight: 600,
                 popoverOptions: CameraPopoverOptions,
                 saveToPhotoAlbum: false
             };
@@ -389,11 +386,13 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
 .controller('PhotoEditCtrl', function($ionicPopup, $scope, $ionicSideMenuDelegate, $window, firstTime, $location, $state, isLogin, $firebaseArray, $firebaseObject, $ionicNavBarDelegate, $ionicScrollDelegate) {
 
 
-        $ionicNavBarDelegate.showBackButton(false);
 
+    $state.reload();
         console.log(isLogin.getIsLogIn());
         console.log("I'm a controller");
+        $ionicSideMenuDelegate.canDragContent(true);
 
+        
         if (firstTime.getIsFirstTime() == true) {
             firstTime.setIsFirstTimeToFalse();
             $state.reload();
@@ -659,14 +658,14 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             $scope.changeDRA = function() {
                 if ($scope.isDrawing == true) {
                     var d = document.getElementById("draId");
-                    d.className = "button button-outline button-royal"
+                    d.className = "button button-outline button-full button-royal"
                     canvas.isDrawingMode = false
                     $scope.isDrawing = false
                     canvas.setActiveObject(canvas.item(0));
                     $ionicScrollDelegate.freezeAllScrolls(false);
                 } else {
                     var d = document.getElementById("draId");
-                    d.className = "button button-outline button-royal pxl-button-activate"
+                    d.className = "button button-outline button-full button-royal pxl-button-activate"
                     canvas.isDrawingMode = true
                     canvas.freeDrawingBrush.color = "black";
                     canvas.freeDrawingBrush.width = 10;
@@ -736,7 +735,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                             user.isInvited = false;
                             user.currentRoom = 0;
                             user.$save();
-
                             $location.path('/app');
 
                             var alertPopup = $ionicPopup.alert({
@@ -753,7 +751,17 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
             };
 
             $scope.reload = function() {
-                $window.location.reload();
+
+                //go back to main page
+                $location.path('/app');
+                var refThree = new Firebase('https://burning-heat-294.firebaseio.com/users/' + isLogin.getFireBaseId());
+                $scope.usersel = $firebaseObject(refThree);
+                $scope.usersel.$loaded().then(function(user) {
+                    console.log("2 here");
+                    user.isInvited = false;
+                    user.$save();
+                });
+
             }
 
             $scope.increaseBrightness = function() {
