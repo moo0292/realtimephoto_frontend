@@ -1,0 +1,57 @@
+<ion-view>
+<ion-nav-title class="titleFont" >Photo Edit</ion-nav-title>
+    <ion-content scroll="true" id="backgroundC">
+   	<div class="row">
+   		<div class="col">
+   		<canvas id="canv" style="border:1px solid black;"></canvas>
+   		</div>
+   	</div>
+        <div class="edit-photo-margin-top row">
+            <div class="col col-25 center-text">
+                <a class="button button-clear button-positive button-icon icon ion-minus-round" ng-click="decreaseBrightness()"  ng-disabled="isDrawing"></a>
+            </div>
+            <div class="col col-50 center-text">
+                <h3 id="brightness-text">Brightness</h3>
+            </div>
+            <div class="col col-25 center-text">
+                <a class="button button-clear button-positive button-icon icon ion-plus-round" ng-click="increaseBrightness()"  ng-disabled="isDrawing"></a>
+            </div>
+        </div>
+        
+        <div class="row">
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-dark" ng-click="changeBW()" id="bwId" ng-disabled="isDrawing">B/W</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-stable" ng-click="changeINV()" id="invId" ng-disabled="isDrawing">INV</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-positive" ng-click="changeSEP()" id="sepId" ng-disabled="isDrawing">SEP</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-balanced" ng-click="changeNOI()" id="noiId" ng-disabled="isDrawing">NOI</button>
+            </div>
+            <div class="col col-20 center-text">
+                <button class="button button-outline button-royal" ng-click="changePXL()" id="pxlId" ng-disabled="isDrawing">PXL</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col center-text">
+                <button class="button button-outline button-full button-royal" ng-click="changeDRA()" id="draId">DRAWING</button>
+            </div>
+        </div>
+        <div class="button-bar">
+            <a class="button button-assertive" ng-click="disableAll()">Disable Filters</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-royal" ng-click="clearDrawing()">Clear Selected Drawing</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-positive" ng-click="saveImage()">Save Image</a>
+        </div>
+        <div class="button-bar">
+            <a class="button button-dark" ng-click="reload()">Cancel</a>
+        </div>
+    </ion-content>
+    
+</ion-view>

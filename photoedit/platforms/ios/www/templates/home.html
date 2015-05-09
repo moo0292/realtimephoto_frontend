@@ -1,0 +1,19 @@
+<ion-view>
+    <ion-nav-title class="titleFont">Home
+    </ion-nav-title>
+    <ion-content id="backgroundC">
+
+        <div ng-repeat="item in allCurrentRoom.slice().reverse()">
+            <div class="list card">
+                <div id="avtC" class="item item-avatar">
+                    <img ng-src="img/logo.jpg">
+                    <div class="homeUserFont">{{item.artist}}</div>
+                    <div class="homeDateFont">April 1, 2015</div>
+                </div>
+                <div class="item item-image">
+                    <img ng-src="{{item.url}}">
+                </div>
+            </div>
+        </div>
+    </ion-content>
+</ion-view>

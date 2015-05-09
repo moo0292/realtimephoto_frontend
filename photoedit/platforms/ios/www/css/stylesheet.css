@@ -1,0 +1,152 @@
+
+#avtC {
+    /*avatar color*/
+    background: #68C3A3;
+}
+
+#loginBackground{
+     background: #68C3A3 !important;
+}
+
+
+.titleFont{
+    /*page wide font of title*/
+    font-family: 'Shadows Into Light', cursive;
+	font-size:30px !important;
+	color:#115377;
+    text-align: center;
+}
+
+.editPhotoBtn{
+
+    height:130px !important;
+}
+
+.navigationBtn{
+    color:#115377 !important;
+}
+
+.userInfoFont{
+    font-family: 'Shadows Into Light', cursive;
+    font-size:20px !important;
+    color:white;
+    text-align: left;
+}
+
+.homeUserFont{
+    /*fonts of each user in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    font-size: 22px;
+    color:#115377;
+}
+.homeDateFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 20px !important;
+    color:#115377;
+}
+
+.loginFont{
+    /*font of the date pic was posted in home page*/
+    font-family: 'Shadows Into Light', cursive;
+    margin-top: 10px;
+    font-size: 20px !important;
+    color:#115377 !important;
+}
+
+#backgroundC {
+    /*page wide background color*/
+    background: #CCEBDC !important;
+}
+
+
+
+#center-text {
+    text-align: center;
+}
+
+.menu-margin-right {
+
+    margin-right: 1em;
+}
+
+.platform-ios.platform-cordova:not(.fullscreen) .bar {
+    background:#68C3A3 ;
+}
+
+#backgroundMenu{ /*background of the menu*/
+	background:#68C3A3;
+}
+
+.menuButton{
+	background:#68C3A3;
+	color:#115377;
+    font-family: 'Shadows Into Light', cursive;
+    height: 62px;
+    font-size:30px !important;
+}
+
+
+#menuLink a { background:#68C3A3;}
+#menuLink a { color:#115377;}
+#menuLink a {height: 62px}
+#menuLink a {font-family: 'Shadows Into Light', cursive;}
+#menuLink a {font-size: 30px !important}
+#menuLink a:active {background:white;}
+
+
+.center-text {
+    text-align: center;
+}
+
+
+.center-vertical {
+    display: table-cell;
+    vertical-align: middle;
+    margin-left: 50%;
+    margin-right: 50%;
+}
+
+#brightness-text {
+    margin-top: 10px;
+    color: #59ABE3;
+}
+
+.bw-button-activate {
+    background-color: #444 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.inv-button-activate {
+    background-color: #b2b2b2 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.sep-button-activate {
+    background-color: #387ef5 !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.noi-button-activate {
+    background-color: #33cd5f !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+.pxl-button-activate {
+    background-color: #886aea !important;
+    box-shadow: none !important;
+    color: #fff !important;
+}
+
+canvas {
+	text-align: center;
+}
+
+.signup-color {
+	color: #387ef5;
+}
