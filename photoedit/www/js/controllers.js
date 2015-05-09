@@ -386,7 +386,7 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
     }
 })
 
-.controller('PhotoEditCtrl', function($ionicPopup, $scope, $ionicSideMenuDelegate, $window, firstTime, $location, $state, isLogin, $firebaseArray, $firebaseObject, $ionicNavBarDelegate, $ionicScrollDelegate) {
+.controller('PhotoEditCtrl', function($ionicPopup, $scope, $ionicSideMenuDelegate, $window, firstTime, $location, $state, isLogin, $firebaseArray, $firebaseObject, $ionicNavBarDelegate) {
 
 
         $ionicNavBarDelegate.showBackButton(false);
@@ -663,7 +663,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                     canvas.isDrawingMode = false
                     $scope.isDrawing = false
                     canvas.setActiveObject(canvas.item(0));
-                    $ionicScrollDelegate.freezeAllScrolls(false);
                 } else {
                     var d = document.getElementById("draId");
                     d.className = "button button-outline button-royal pxl-button-activate button-full"
@@ -671,7 +670,6 @@ angular.module('starter.controllers', ['ionic', 'ngCordova', 'firebase'])
                     canvas.freeDrawingBrush.color = "black";
                     canvas.freeDrawingBrush.width = 10;
                     $scope.isDrawing = true
-                    $ionicScrollDelegate.freezeAllScrolls(true);
                 }
             }
 
